@@ -154,10 +154,10 @@ const LandingPage = () => {
           <div className='w-full mx-auto px-4 md:px-8 py-12'>
             {/* Header Section - Remains mostly the same */}
             <div className='flex items-baseline mb-12'>
-              <span className='font-playfair italic text-2xl sm:text-4xl mr-4'>
+              <span className='font-playfair italic text-3xl sm:text-4xl mr-4'>
                 ABOUT
               </span>
-              <span className='text-4xl md:text-6xl font-black text-[#9494FF] tracking-tighter font-primary'>
+              <span className='text-5xl md:text-6xl font-black text-[#9494FF] tracking-tighter font-primary'>
                 OUR QUIZ
               </span>
             </div>
@@ -166,7 +166,7 @@ const LandingPage = () => {
               {/* Sidebar */}
               <div className='md:col-span-3 border-r border-gray-300'>
                 <div className='p-6 border-b border-gray-300 bg-[#F2F4FD]'>
-                  <h3 className='text-3xl font-bold lowercase'>
+                  <h3 className='text-xl sm:text-3xl font-bold lowercase'>
                     khía cạnh phân loại
                   </h3>
                 </div>
