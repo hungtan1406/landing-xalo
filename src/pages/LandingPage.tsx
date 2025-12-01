@@ -6,6 +6,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MadeWithDyad } from '@/components/made-with-dyad';
 import { X, Menu } from 'lucide-react';
 
+// 1. Định nghĩa kiểu dữ liệu cho Card
+interface CardData {
+  id: number;
+  src: string;
+  alt: string;
+}
+
+// Dữ liệu mẫu cho các card
+const initialCardData: CardData[] = [
+  { id: 1, src: 'Omega 3.png', alt: 'Công thức 1' },
+  { id: 2, src: 'Sugar Pill.png', alt: 'Công thức 2' },
+  { id: 3, src: 'Vitamin C.png', alt: 'Công thức 3' },
+  { id: 4, src: 'Bee Pollen.png', alt: 'Công thức 4' },
+  { id: 5, src: 'Gummy Bear.png', alt: 'Công thức 5' },
+  { id: 6, src: 'Multi-vitamins.png', alt: 'Công thức 6' },
+  { id: 7, src: 'Caffeine Tablet.png', alt: 'Công thức 7' },
+  { id: 8, src: 'Cough Syrup.png', alt: 'Công thức 8' },
+];
+
 const LandingPage = () => {
   const navigate = useNavigate();
 
@@ -15,13 +34,48 @@ const LandingPage = () => {
 
   const [isOpen, setOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setOpen(!isOpen);
+  // Carousel State Management
+  const [activeIndex, setActiveIndex] = useState(0);
+  const totalCards = initialCardData.length;
+
+  // Carousel Logic Functions
+  const goToNext = () => {
+    // Logic vòng lặp: Nếu đang ở cuối, quay lại đầu (index 0).
+    setActiveIndex((prevIndex) =>
+      prevIndex === totalCards - 1 ? 0 : prevIndex + 1
+    );
   };
+
+  const goToPrev = () => {
+    // Logic vòng lặp: Nếu đang ở đầu, chuyển đến cuối.
+    setActiveIndex((prevIndex) =>
+      prevIndex === 0 ? totalCards - 1 : prevIndex - 1
+    );
+  };
+
+  // Hàm lấy chỉ mục của card bên trái/phải dựa trên activeIndex.
+  const getCardIndex = (offset: number): number => {
+    return (activeIndex + offset + totalCards) % totalCards;
+  };
+
+  const leftCardIndex = getCardIndex(-1);
+  const centerCardIndex = activeIndex;
+  const rightCardIndex = getCardIndex(1);
+
+  const leftCard = initialCardData[leftCardIndex];
+  const centerCard = initialCardData[centerCardIndex];
+  const rightCard = initialCardData[rightCardIndex];
+
+  // Logic hiển thị card (chỉ hiển thị đủ 3 card nếu có >= 3 card)
+  const showLeft =
+    totalCards >= 3 || (totalCards === 2 && leftCardIndex !== rightCardIndex);
+  const showRight =
+    totalCards >= 3 || (totalCards === 2 && rightCardIndex !== leftCardIndex);
 
   return (
     <div className='min-h-screen flex flex-col bg-white text-gray-900'>
       <header className='w-full bg-white py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50'>
+        {/* ... (Phần Header không thay đổi) ... */}
         {/* Logo */}
         <div className='flex items-center space-x-2'>
           <img src='logo-footer.png' alt='' className='w-16' />
@@ -92,8 +146,9 @@ const LandingPage = () => {
       </header>
 
       <main className='flex-grow'>
+        {/* ... (Phần Hero và About không thay đổi) ... */}
         <div className='w-full mx-auto px-4 md:px-8 pt-12 pb-20'>
-          <h1 className='text-6xl md:text-9xl font-black tracking-tighter mb-12 text-center font-primary'>
+          <h1 className='text-6xl md:text-9xl font-black tracking-tighter text-center font-primary'>
             DECODE YOUR <span className='text-[#9494FF]'>IELTS DNA</span>
           </h1>
         </div>
@@ -101,23 +156,25 @@ const LandingPage = () => {
           {/* Hero Section */}
           <div className='grid grid-cols-1 md:grid-cols-12'>
             {/* Left Image Placeholder */}
-            <div className='md:col-span-8 bg-gray-200 h-96 rounded-none flex items-center justify-center relative overflow-hidden group'>
-              <img src='second.png' alt='' />
-
-              <div className='absolute inset-0 bg-gradient-to-tr from-blue-200 to-purple-200 opacity-50 group-hover:opacity-70 transition-opacity duration-500'></div>
+            <div className='md:col-span-8 bg-gray-200 min-h-[400px] relative overflow-hidden'>
+              <img
+                src='second.png'
+                alt=''
+                className='w-full h-full absolute inset-0 object-cover'
+              />
             </div>
 
             {/* Right Content */}
-            <div className='md:col-span-4 flex flex-col justify-between bg-gray-50 p-8'>
+            <div className='md:col-span-4 min-h-[400px] flex flex-col justify-center bg-gray-50 p-8 gap-10'>
               <div>
-                <h2 className='text-3xl md:text-4xl font-medium font-playfair leading-tight mb-6'>
+                <h2 className='text-3xl md:text-4xl font-medium font-primary leading-tight'>
                   Giải mã gen học tập của riêng bạn - và cách “tái lập trình” để
                   đạt band mục tiêu.
                 </h2>
               </div>
               <Button
                 onClick={handleStartQuiz}
-                className='w-full bg-[#9494FF] hover:bg-[#8494FF]  text-white py-8 text-lg font-bold uppercase tracking-wider rounded-sm shadow-lg hover:shadow-xl transition-all'
+                className='w-full bg-[#9494FF] hover:bg-[#8494FF] font-primary text-white py-8 text-lg font-bold uppercase tracking-wider rounded-sm shadow-lg hover:shadow-xl transition-all'
               >
                 Bắt đầu
               </Button>
@@ -125,9 +182,9 @@ const LandingPage = () => {
           </div>
 
           {/* Sub-hero Grid */}
-          <div className='grid grid-cols-1 md:grid-cols-3'>
-            <div className='bg-gray-100 p-8 h-64 flex flex-col justify-between hover:bg-gray-200 transition-colors'>
-              <h3 className='text-2xl font-medium leading-tight font-primary'>
+          <div className='grid grid-cols-1 md:grid-cols-12'>
+            <div className='bg-gray-100 p-8 min-h-[400px] flex flex-col justify-between hover:bg-gray-200 transition-colors md:col-span-4'>
+              <h3 className='text-2xl leading-tight font-primary'>
                 Được thiết kế bởi đội ngũ chuyên gia ielts của xa lộ english
               </h3>
               <p className='text-xs text-gray-500'>
@@ -135,8 +192,8 @@ const LandingPage = () => {
                 để không còn "học mãi mà không tiến".
               </p>
             </div>
-            <div className='bg-gray-100 p-8 h-64 flex flex-col justify-between hover:bg-gray-200 transition-colors'>
-              <h3 className='text-2xl font-medium leading-tight font-primary'>
+            <div className='bg-gray-100 p-8 min-h-[400px] flex flex-col justify-between hover:bg-gray-200 transition-colors md:col-span-4'>
+              <h3 className='text-2xl leading-tight font-primary'>
                 Bản phân tích cá nhân hóa của riêng bạn
               </h3>
               <p className='text-xs text-gray-500'>
@@ -144,8 +201,12 @@ const LandingPage = () => {
                 lập trình" IELTS của bạn.
               </p>
             </div>
-            <div className='bg-gray-300 h-64 flex items-center justify-center relative overflow-hidden'>
-              <img src='third.png' alt='' className='h-full' />
+            <div className='bg-gray-300 min-h-[400px] flex items-center justify-center relative overflow-hidden md:col-span-4'>
+              <img
+                src='third.png'
+                alt=''
+                className='w-full h-full absolute inset-0 object-cover'
+              />
             </div>
           </div>
         </div>
@@ -153,9 +214,9 @@ const LandingPage = () => {
         {/* About Section */}
         <div className='mt-8'>
           <div className='w-full'>
-            {/* Header Section - Remains mostly the same */}
-            <div className='flex items-baseline mb-12 ml-4'>
-              <span className='font-playfair italic text-3xl sm:text-4xl lg:text-6xl mr-4'>
+            {/* Header Section*/}
+            <div className='flex items-baseline mb-1 ml-4'>
+              <span className='font-playfair italic text-3xl sm:text-4xl lg:text-5xl mr-4'>
                 ABOUT
               </span>
               <span className='text-5xl md:text-6xl lg:text-8xl font-black text-[#9494FF] tracking-tighter font-primary'>
@@ -176,7 +237,7 @@ const LandingPage = () => {
                   <h4 className='font-bold text-lg md:text-xl mb-2 uppercase'>
                     KNOWLEDGE (KIẾN THỨC)
                   </h4>
-                  <p className='text-md font-medium text-gray-800 leading-relaxed'>
+                  <p className='text-base text-gray-800 leading-relaxed'>
                     Mức độ hiểu biết về ngữ pháp, từ vựng, và các khả năng ngôn
                     ngữ cũng như chiến lược, cách thức làm từng dạng bài trong
                     từng kỹ năng riêng biệt.
@@ -187,7 +248,7 @@ const LandingPage = () => {
                   <h4 className='font-bold text-lg md:text-xl mb-2 uppercase'>
                     TEST-TAKING SKILLS (KỸ NĂNG LÀM BÀI THI)
                   </h4>
-                  <p className='text-md font-medium text-gray-800 leading-relaxed'>
+                  <p className='text-base text-gray-800 leading-relaxed'>
                     Kỹ năng quản lý thời gian, nhận biết dạng bài, và áp dụng kỹ
                     thuật làm bài.
                   </p>
@@ -197,7 +258,7 @@ const LandingPage = () => {
                   <h4 className='font-bold text-lg md:text-xl mb-2 uppercase'>
                     BEHAVIORAL PATTERNS (HÀNH VI HỌC TẬP)
                   </h4>
-                  <p className='text-md font-medium text-gray-800 leading-relaxed'>
+                  <p className='text-base text-gray-800 leading-relaxed'>
                     Thái độ, hành vi, tâm lý và phương pháp học tập.
                   </p>
                 </div>
@@ -229,22 +290,102 @@ const LandingPage = () => {
             Bắt đầu
           </Button>
 
-          {/* Cards Placeholder */}
-          <div className='flex justify-center items-center space-x-4 px-4 overflow-hidden'>
-            <div className='w-48 h-82 bg-white rounded-xl transform -rotate-6 border-4 border-black'>
-              <img src='1.png' alt='' />
+          {/* 4. CAROUSEL SECTION: Thay thế code placeholder cũ bằng logic Carousel */}
+          <div className='flex flex-col items-center'>
+            <div className='flex justify-center items-center overflow-hidden relative'>
+              {/* Card Trái (Left Card) */}
+              {showLeft && (
+                <div
+                  key={leftCard.id} // Quan trọng cho animation khi chuyển card
+                  className='w-56 h-56 bg-white rounded-xl transform -rotate-6 border-4 border-black transition-all duration-500 ease-in-out opacity-70 scale-90'
+                >
+                  {/* Sử dụng object-cover và w-full h-full để ảnh hiển thị đúng */}
+                  <img
+                    src={leftCard.src}
+                    alt={leftCard.alt}
+                    className='w-full h-full object-cover rounded-xl'
+                  />
+                </div>
+              )}
+
+              {/* Card Trung Tâm (Center/Active Card) */}
+              <div
+                key={centerCard.id}
+                className='w-64 h-64 bg-white rounded-xl z-10 border-4 border-black transition-all duration-500 ease-in-out shadow-2xl'
+              >
+                <img
+                  src={centerCard.src}
+                  alt={centerCard.alt}
+                  className='w-full h-full object-cover rounded-xl'
+                />
+              </div>
+
+              {/* Card Phải (Right Card) */}
+              {showRight && (
+                <div
+                  key={rightCard.id}
+                  className='w-56 h-56 bg-white rounded-xl transform rotate-6 border-4 border-black transition-all duration-500 ease-in-out opacity-70 scale-90'
+                >
+                  <img
+                    src={rightCard.src}
+                    alt={rightCard.alt}
+                    className='w-full h-full object-cover rounded-xl'
+                  />
+                </div>
+              )}
             </div>
-            <div className='w-56 h-86 bg-white rounded-xl z-10 border-4 border-black'>
-              <img src='2.png' alt='' />
-            </div>
-            <div className='w-48 h-82 bg-white rounded-xl transform rotate-6 border-4 border-black'>
-              <img src='3.png' alt='' />
+
+            {/* 5. Navigation Arrows */}
+            <div className='flex justify-center space-x-4 mt-8'>
+              {/* Nút Mũi Tên Trái (Previous) */}
+              <button
+                onClick={goToPrev}
+                className='flex items-center justify-center w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors duration-300 shadow-md'
+                aria-label='Previous Card'
+              >
+                <svg
+                  className='w-6 h-6'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M15 19l-7-7 7-7'
+                  ></path>
+                </svg>
+              </button>
+
+              {/* Nút Mũi Tên Phải (Next) */}
+              <button
+                onClick={goToNext}
+                className='flex items-center justify-center w-12 h-12 rounded-full bg-white text-black hover:bg-gray-200 transition-colors duration-300 shadow-md'
+                aria-label='Next Card'
+              >
+                <svg
+                  className='w-6 h-6'
+                  fill='none'
+                  stroke='currentColor'
+                  viewBox='0 0 24 24'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
+                    strokeWidth='2'
+                    d='M9 5l7 7-7 7'
+                  ></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
       </main>
 
-      {/* Footer */}
+      {/* ... (Phần Footer không thay đổi) ... */}
       <footer className='bg-gray-50 py-12 px-4 md:px-8 border-t border-gray-200'>
         <div className='flex flex-col sm:flex-row justify-between items-start mb-12'>
           <div className='flex items-center space-x-1'>

@@ -3,8 +3,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { MadeWithDyad } from '@/components/made-with-dyad';
-import { QuizResult, LearningType } from '@/types';
+import { QuizResult } from '@/types';
 import { learnerProfiles } from '@/data/learnerTypes';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import html2canvas from 'html2canvas';
@@ -18,9 +17,9 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ArrowRight, RotateCcw } from 'lucide-react';
 import { showSuccess, showError } from '@/utils/toast';
 import { supabase } from '@/integrations/supabase/client';
+import { X, Menu } from 'lucide-react';
 
 const ResultPage = () => {
   const location = useLocation();
@@ -34,6 +33,10 @@ const ResultPage = () => {
   const [fullName, setFullName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isOpen, setOpen] = useState(false);
+  const handleStartQuiz = () => {
+    navigate('/quiz');
+  };
 
   useEffect(() => {
     if (result?.learningType && learnerProfiles[result.learningType]) {
@@ -132,37 +135,88 @@ const ResultPage = () => {
   return (
     <div className='min-h-screen bg-[#F3F4F6] text-black overflow-x-hidden'>
       <div ref={resultRef} className='bg-[#F3F4F6]'>
-        <header className='w-full font-primary bg-white py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50'>
+        <header className='w-full bg-white py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50'>
+          {/* ... (Phần Header không thay đổi) ... */}
+          {/* Logo */}
           <div className='flex items-center space-x-2'>
             <img src='logo-footer.png' alt='' className='w-16' />
-            <a href='/' className='font-bold text-xl tracking-tighter ml-2'>
+            <span className='font-primary font-bold text-xl tracking-tighter ml-2'>
               XALO ENGLISH
-            </a>
+            </span>
           </div>
-          <div className='hidden md:flex space-x-6 text-sm font-medium text-gray-500'>
+
+          {/* Menu Desktop*/}
+          <div className='hidden md:flex items-center justify-end space-x-6 text-sm font-medium text-gray-500'>
             <a href='/' className='hover:text-black transition-colors'>
               HOME
             </a>
             <a
               href='https://xalo.edu.vn/'
               className='hover:text-black transition-colors'
+              target='_blank'
+              rel='noreferrer'
             >
               ABOUT XALO
             </a>
+            <Button
+              onClick={handleStartQuiz}
+              className='bg-[#9494FF] hover:bg-[#8494FF] text-white rounded-md px-6 font-bold uppercase text-xs tracking-widest'
+            >
+              Start Test
+            </Button>
           </div>
+
+          {/* Mobile Menu Trigger*/}
+          <div
+            className='md:hidden cursor-pointer p-2'
+            onClick={() => setOpen(!isOpen)}
+          >
+            {isOpen ? (
+              <X className='w-8 h-8 text-black transition-transform duration-300' />
+            ) : (
+              <Menu className='w-8 h-8 text-black transition-transform duration-300' />
+            )}
+          </div>
+
+          {isOpen && (
+            <div className='absolute font-primary top-full left-0 w-full bg-white border-b border-gray-200 shadow-xl flex flex-col px-6 pb-8 md:hidden animate-in slide-in-from-top-5 duration-200'>
+              <a
+                href='/'
+                className='py-4 border-b border-gray-100 text-sm font-bold uppercase tracking-widest hover:text-blue-600'
+              >
+                HOME
+              </a>
+
+              <a
+                href='https://xalo.edu.vn/'
+                className='py-4 border-b border-gray-100 text-sm font-bold uppercase tracking-widest hover:text-blue-600 mb-6'
+                target='_blank'
+                rel='noreferrer'
+              >
+                ABOUT
+              </a>
+
+              <Button
+                onClick={handleStartQuiz}
+                className='w-full bg-blue-500 hover:bg-blue-600 text-white py-6 text-base font-bold uppercase tracking-widest rounded-sm shadow-md'
+              >
+                RESERVE YOUR CLASS
+              </Button>
+            </div>
+          )}
         </header>
 
         {/* 1. HEADER SECTION */}
         <div className='bg-white pt-6 border-b border-gray-200'>
           <div className=''>
-            <h1 className='text-4xl md:text-8xl font-primary font-bold uppercase tracking-tighter mb-8 px-4'>
+            <h1 className='text-4xl md:text-8xl font-primary font-black uppercase tracking-tighter mb-8 px-4'>
               YOUR IELTS DNA IS...
             </h1>
 
             <div className='grid grid-cols-1 md:grid-cols-12 '>
               {/* Left: Text Info */}
               <div className='md:col-span-7 bg-[#8B9DFF] p-8 md:p-12 relative overflow-hidden'>
-                <h2 className='italic text-4xl md:text-5xl mb-2 text-black font-playfair'>
+                <h2 className='italic text-4xl md:text-5xl mb-2 font-medium text-black font-playfair'>
                   {profile.name}
                 </h2>
 
@@ -177,9 +231,13 @@ const ResultPage = () => {
               </div>
 
               {/* Right: Image Placeholder */}
-              <div className='md:col-span-5 bg-gray-300 min-h-[300px] flex items-center justify-center relative'>
+              <div className='md:col-span-5 bg-gray-300 min-h-[400px] flex items-center justify-center relative'>
                 <span className='font-serif italic text-4xl text-white'>
-                  <img src={profile.image} alt='' />
+                  <img
+                    src={profile.image}
+                    alt='profile'
+                    className='w-full h-full absolute inset-0 object-cover'
+                  />
                 </span>
               </div>
             </div>
@@ -195,7 +253,7 @@ const ResultPage = () => {
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             {/* Knowledge Card */}
             <div className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-              <h3 className='text-xl font-bold uppercase tracking-widest mb-4 text-center'>
+              <h3 className='sm:text-xl text-lg font-primary font-bold uppercase mb-4 text-center'>
                 HOẠT CHẤT NỀN TẢNG
                 <br />
                 (KIẾN THỨC)
@@ -208,7 +266,7 @@ const ResultPage = () => {
 
             {/* Skills Card */}
             <div className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-              <h3 className='text-xl font-bold uppercase tracking-widest mb-4 text-center'>
+              <h3 className='sm:text-xl text-lg font-primary font-bold uppercase mb-4 text-center'>
                 CƠ CHẾ KÍCH HOẠT
                 <br />
                 (KỸ NĂNG LÀM BÀI THI)
@@ -221,7 +279,7 @@ const ResultPage = () => {
 
             {/* Behavior Card */}
             <div className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-              <h3 className='text-xl font-bold uppercase tracking-widest mb-4 text-center'>
+              <h3 className='sm:text-xl text-lg font-primary font-bold uppercase mb-4 text-center'>
                 HOẠT CHẤT ĐIỀU HÒA
                 <br />
                 (THÁI ĐỘ HỌC TẬP)
@@ -259,12 +317,7 @@ const ResultPage = () => {
         </section>
 
         {/* 4. HEALTH LEVEL SECTION (MỨC ĐỘ SỨC KHỎE HỌC TẬP) */}
-        <section
-          className='
-                    py-16 px-4 md:px-8 max-w-full mx-auto
-                    bg-gradient-to-br from-purple-50 to-white                
-                '
-        >
+        <section className='py-16 px-4 md:px-8 max-w-full mx-auto bg-gradient-to-br from-purple-50 to-white'>
           <h2 className='italic text-4xl md:text-5xl text-center mb-8 font-playfair'>
             MỨC ĐỘ SỨC KHỎE HỌC TẬP
           </h2>
@@ -419,7 +472,7 @@ const ResultPage = () => {
 
       {/* 5. FOOTER / CTA */}
       <section className='py-20 bg-gradient-to-b from-[#8B9DFF] to-[#E0E7FF] text-center px-4'>
-        <h2 className='font-playfair italic text-4xl md:text-5xl mb-12 font-semibold'>
+        <h2 className='font-playfair italic text-3xl sm:text-4xl md:text-5xl mb-12 font-semibold'>
           SẴN SÀNG CHO BƯỚC TIẾP THEO?
           <br />
           CÙNG XEM LỘ TRÌNH TỰ HỌC CÁ
@@ -532,10 +585,6 @@ const ResultPage = () => {
               </li>
             </ul>
           </div>
-        </div>
-
-        <div className='mt-12 text-center'>
-          <MadeWithDyad />
         </div>
       </footer>
 

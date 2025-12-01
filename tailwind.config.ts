@@ -19,8 +19,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        playfair: ['Playfair', 'cursive'], 
-        primary: ['"Bricolage Grotesque"', 'sans-serif'],
+        playfair: ["Playfair Display", "serif" ],
+        primary: ['Bricolage Grotesque', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
