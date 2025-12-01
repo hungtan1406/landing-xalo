@@ -161,7 +161,7 @@ const ResultPage = () => {
 
             <div className='grid grid-cols-1 md:grid-cols-12 '>
               {/* Left: Text Info */}
-              <div className='md:col-span-7 bg-[#8B9DFF] p-8 md:p-12 rounded-none relative overflow-hidden'>
+              <div className='md:col-span-7 bg-[#8B9DFF] p-8 md:p-12 relative overflow-hidden'>
                 <h2 className='italic text-4xl md:text-5xl mb-2 text-black font-playfair'>
                   {profile.name}
                 </h2>
@@ -236,15 +236,15 @@ const ResultPage = () => {
 
         {/* 3. SIDE EFFECTS SECTION (TÁC DỤNG PHỤ) */}
         <section className='py-16 bg-[#E0E7FF] px-4 md:px-8'>
-          <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center'>
+          <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center'>
             <div>
               <h2 className='font-playfair italic text-4xl md:text-5xl mb-8'>
                 TÁC DỤNG PHỤ
               </h2>
-              <p className='text-sm md:text-base leading-relaxed text-gray-800 mb-6'>
+              {/* <p className='text-sm md:text-base leading-relaxed text-gray-800 mb-6'>
                 &lt;!&gt; Lưu ý: Mỗi loại "thuốc" học tập đều có những phản ứng
                 không mong muốn.
-              </p>
+              </p> */}
               <p className='text-sm md:text-base leading-relaxed text-gray-800 font-medium'>
                 {profile.sideEffects}
               </p>
@@ -252,9 +252,7 @@ const ResultPage = () => {
             <div className='flex justify-center'>
               {/* Butterfly Icon Placeholder */}
               <div className='w-64 h-64 bg-white/50 rounded-full flex items-center justify-center'>
-                <span className='font-serif italic text-2xl text-[#8B9DFF]'>
-                  <img src='butterfly-icon.png' alt='' />
-                </span>
+                <img src='butterfly-icon.png' alt='' />
               </div>
             </div>
           </div>
@@ -421,14 +419,13 @@ const ResultPage = () => {
 
       {/* 5. FOOTER / CTA */}
       <section className='py-20 bg-gradient-to-b from-[#8B9DFF] to-[#E0E7FF] text-center px-4'>
-        <h2 className='font-playfair italic text-4xl md:text-5xl mb-4'>
+        <h2 className='font-playfair italic text-4xl md:text-5xl mb-4 font-semibold'>
           SẴN SÀNG CHO BƯỚC TIẾP THEO?
-        </h2>
-        <h3 className='font-playfair italic text-3xl md:text-4xl mb-12'>
+          <br />
           CÙNG XEM LỘ TRÌNH TỰ HỌC CÁ
           <br />
           NHÂN HOÁ CỦA BẠN.
-        </h3>
+        </h2>
 
         <Button
           className='bg-black font-primary text-white hover:bg-gray-800 font-bold py-4 px-10 rounded-sm uppercase tracking-widest text-lg shadow-xl'
@@ -439,7 +436,7 @@ const ResultPage = () => {
         </Button>
       </section>
 
-      <footer className='bg-gray-50 py-12 px-4 md:px-8 border-t border-gray-200'>
+      {/* <footer className='bg-gray-50 py-12 px-4 md:px-8 border-t border-gray-200'>
         <div className='flex justify-between items-start mb-12'>
           <div className='flex items-center space-x-1'>
             <img src='logo-footer.png' alt='' className='w-16' />
@@ -485,6 +482,60 @@ const ResultPage = () => {
               </li>
             </ul>
           </div>
+        </div>
+      </footer> */}
+      <footer className='bg-gray-50 py-12 px-4 md:px-8 border-t border-gray-200'>
+        <div className='flex flex-col sm:flex-row justify-between items-start mb-12'>
+          <div className='flex items-center space-x-1'>
+            <img src='logo-footer.png' alt='' className='w-16 md:w-32' />
+          </div>
+          <span className='font-playfair italic text-3xl md:text-4xl lg:text-6xl'>
+            XA LỘ ENGLISH
+          </span>
+        </div>
+
+        <div className='flex flex-col sm:flex-row justify-between items-start mb-12 text-xs font-bold uppercase tracking-wider'>
+          <div>
+            <h4 className='mb-4 text-gray-400'>CONTACT</h4>
+            <p>Email: hello@xalo.edu.vn</p>
+            <p>Phone: 0793 159 413</p>
+          </div>
+          <div>
+            <h4 className='mb-4 text-gray-400'>OPENING HOURS</h4>
+            <div className='flex justify-between gap-2 max-w-xs'>
+              <span>MON - SAT</span>
+              <span>9AM - 10PM</span>
+            </div>
+            <div className='flex justify-between max-w-xs'>
+              <span>SUNDAYS</span>
+              <span>8AM - 12PM</span>
+            </div>
+          </div>
+          <div>
+            <h4 className='mb-4 text-gray-400'>SOCIAL</h4>
+            <ul className='space-y-1'>
+              <li>
+                <a
+                  rel='stylesheet'
+                  href='https://www.instagram.com/xalo.english/'
+                >
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a
+                  rel='stylesheet'
+                  href='https://www.instagram.com/xalo.english/'
+                >
+                  Facebook
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className='mt-12 text-center'>
+          <MadeWithDyad />
         </div>
       </footer>
 

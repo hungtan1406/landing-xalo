@@ -98,7 +98,7 @@ const LandingPage = () => {
             DECODE YOUR <span className='text-[#9494FF]'>IELTS DNA</span>
           </h1>
 
-          <div className='grid grid-cols-1 md:grid-cols-12 gap-4'>
+          <div className='grid grid-cols-1 md:grid-cols-12 '>
             {/* Left Image Placeholder */}
             <div className='md:col-span-8 bg-gray-200 h-96 rounded-none flex items-center justify-center relative overflow-hidden group'>
               <img src='second.png' alt='' />
@@ -151,13 +151,13 @@ const LandingPage = () => {
 
         {/* About Section */}
         <div>
-          <div className='w-full mx-auto px-4 md:px-8 py-12'>
+          <div className='w-full mx-auto px-4 md:px-8 py-2'>
             {/* Header Section - Remains mostly the same */}
             <div className='flex items-baseline mb-12'>
-              <span className='font-playfair italic text-3xl sm:text-4xl mr-4'>
+              <span className='font-playfair italic text-3xl sm:text-4xl lg:text-6xl mr-4'>
                 ABOUT
               </span>
-              <span className='text-5xl md:text-6xl font-black text-[#9494FF] tracking-tighter font-primary'>
+              <span className='text-5xl md:text-6xl lg:text-8xl font-black text-[#9494FF] tracking-tighter font-primary'>
                 OUR QUIZ
               </span>
             </div>

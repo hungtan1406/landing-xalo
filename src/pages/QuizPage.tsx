@@ -253,12 +253,14 @@ const QuizPage = () => {
     <div className='min-h-screen flex flex-col items-center justify-center bg-blue-50 p-4 font-sans'>
       <div className='w-full max-w-3xl mx-auto'>
         {/* Progress Header */}
-        <div className='mb-8 text-center'>
-          <div className='w-full bg-gray-200 rounded-full h-2.5 mb-4 dark:bg-gray-700'>
+        <div className='mb-4 text-center'>
+          <div className='w-full bg-gray-200 rounded-full h-8 mb-4 dark:bg-gray-700'>
             <div
-              className='bg-[#9494FF] h-2.5 rounded-full'
+              className='bg-[#9494FF] h-8 rounded-full p-1 font-bold'
               style={{ width: `${progress}%` }}
-            ></div>
+            >
+              {progress.toFixed(0)}% completed
+            </div>
           </div>
           <div>
             <p className='text-xl font-primary font-bold text-black uppercase '>
