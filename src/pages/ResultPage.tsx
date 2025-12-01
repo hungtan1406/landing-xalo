@@ -269,7 +269,7 @@ const ResultPage = () => {
             MỨC ĐỘ SỨC KHỎE HỌC TẬP
           </h2>
 
-          <div className='space-y-16 md:space-y-4'>
+          <div className='space-y-16 sm:space-y-4'>
             {/* Knowledge Stats */}
             <div className='grid grid-cols-1 md:grid-cols-3 items-center'>
               <div className='text-center '>
