@@ -4,16 +4,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate } from 'react-router-dom';
 import { MadeWithDyad } from '@/components/made-with-dyad';
-import {
-  ArrowRight,
-  Dna,
-  Pill,
-  Brain,
-  Zap,
-  Heart,
-  X,
-  Menu,
-} from 'lucide-react';
+import { X, Menu } from 'lucide-react';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -163,13 +154,15 @@ const LandingPage = () => {
           <div className='w-full mx-auto px-4 md:px-8 py-12'>
             {/* Header Section - Remains mostly the same */}
             <div className='flex items-baseline mb-12'>
-              <span className='font-playfair italic text-4xl mr-4'>ABOUT</span>
-              <span className='text-6xl md:text-8xl font-black text-[#9494FF] tracking-tighter font-primary'>
+              <span className='font-playfair italic text-2xl sm:text-4xl mr-4'>
+                ABOUT
+              </span>
+              <span className='text-4xl md:text-6xl font-black text-[#9494FF] tracking-tighter font-primary'>
                 OUR QUIZ
               </span>
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-12 gap-0 border-t border-gray-300'>
+            <div className='grid grid-cols-1 md:grid-cols-12 border-t border-gray-300'>
               {/* Sidebar */}
               <div className='md:col-span-3 border-r border-gray-300'>
                 <div className='p-6 border-b border-gray-300 bg-[#F2F4FD]'>
@@ -252,14 +245,16 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className='bg-gray-50 py-12 px-4 md:px-8 border-t border-gray-200'>
-        <div className='flex justify-between items-start mb-12'>
+        <div className='flex flex-col sm:flex-row justify-between items-start mb-12'>
           <div className='flex items-center space-x-1'>
-            <img src='logo-footer.png' alt='' className='w-16' />
+            <img src='logo-footer.png' alt='' className='w-16 md:w-32' />
           </div>
-          <span className='font-playfair italic text-6xl'>XA LỘ ENGLISH</span>
+          <span className='font-playfair italic text-3xl md:text-4xl lg:text-6xl'>
+            XA LỘ ENGLISH
+          </span>
         </div>
 
-        <div className='flex justify-between items-start mb-12 text-xs font-bold uppercase tracking-wider'>
+        <div className='flex flex-col sm:flex-row justify-between items-start mb-12 text-xs font-bold uppercase tracking-wider'>
           <div>
             <h4 className='mb-4 text-gray-400'>CONTACT</h4>
             <p>Email: hello@xalo.edu.vn</p>
@@ -267,7 +262,7 @@ const LandingPage = () => {
           </div>
           <div>
             <h4 className='mb-4 text-gray-400'>OPENING HOURS</h4>
-            <div className='flex justify-between max-w-xs'>
+            <div className='flex justify-between gap-2 max-w-xs'>
               <span>MON - SAT</span>
               <span>9AM - 10PM</span>
             </div>
