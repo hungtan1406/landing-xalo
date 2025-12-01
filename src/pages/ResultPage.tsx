@@ -130,7 +130,7 @@ const ResultPage = () => {
   };
 
   return (
-    <div className='min-h-screen bg-[#F3F4F6] font-sans text-black overflow-x-hidden'>
+    <div className='min-h-screen bg-[#F3F4F6] text-black overflow-x-hidden'>
       <div ref={resultRef} className='bg-[#F3F4F6]'>
         <header className='w-full font-primary bg-white py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50'>
           <div className='flex items-center space-x-2'>
@@ -153,9 +153,9 @@ const ResultPage = () => {
         </header>
 
         {/* 1. HEADER SECTION */}
-        <div className='bg-white pt-12 pb-8 px-4 md:px-8 border-b border-gray-200'>
-          <div className='max-w-7xl mx-auto'>
-            <h1 className='text-4xl md:text-8xl font-primary font-bold uppercase tracking-tighter mb-8'>
+        <div className='bg-white pt-6 border-b border-gray-200'>
+          <div className=''>
+            <h1 className='text-4xl md:text-8xl font-primary font-bold uppercase tracking-tighter mb-8 px-4'>
               YOUR IELTS DNA IS...
             </h1>
 
@@ -187,7 +187,7 @@ const ResultPage = () => {
         </div>
 
         {/* 2. INGREDIENTS SECTION (THÀNH PHẦN) */}
-        <section className='py-16 px-4 md:px-8 max-w-7xl mx-auto'>
+        <section className='py-16 max-w-7xl mx-auto px-4 md:px-8'>
           <h2 className='font-playfair italic text-4xl md:text-5xl text-start mb-16'>
             THÀNH PHẦN
           </h2>
@@ -195,7 +195,7 @@ const ResultPage = () => {
           <div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
             {/* Knowledge Card */}
             <div className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-              <h3 className='text-xs font-bold uppercase tracking-widest mb-4 text-center'>
+              <h3 className='text-xl font-bold uppercase tracking-widest mb-4 text-center'>
                 HOẠT CHẤT NỀN TẢNG
                 <br />
                 (KIẾN THỨC)
@@ -208,7 +208,7 @@ const ResultPage = () => {
 
             {/* Skills Card */}
             <div className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-              <h3 className='text-xs font-bold uppercase tracking-widest mb-4 text-center'>
+              <h3 className='text-xl font-bold uppercase tracking-widest mb-4 text-center'>
                 CƠ CHẾ KÍCH HOẠT
                 <br />
                 (KỸ NĂNG LÀM BÀI THI)
@@ -221,7 +221,7 @@ const ResultPage = () => {
 
             {/* Behavior Card */}
             <div className='bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow'>
-              <h3 className='text-xs font-bold uppercase tracking-widest mb-4 text-center'>
+              <h3 className='text-xl font-bold uppercase tracking-widest mb-4 text-center'>
                 HOẠT CHẤT ĐIỀU HÒA
                 <br />
                 (THÁI ĐỘ HỌC TẬP)
@@ -265,15 +265,15 @@ const ResultPage = () => {
                     bg-gradient-to-br from-purple-50 to-white                
                 '
         >
-          <h2 className='italic text-4xl md:text-5xl text-center mb-16 font-playfair'>
+          <h2 className='italic text-4xl md:text-5xl text-center mb-8 font-playfair'>
             MỨC ĐỘ SỨC KHỎE HỌC TẬP
           </h2>
 
-          <div className='space-y-16'>
+          <div className='space-y-4'>
             {/* Knowledge Stats */}
-            <div className='grid grid-cols-1 md:grid-cols-3 items-center gap-4'>
-              <div className='text-center md:text-right'>
-                <h3 className='font-bold text-sm uppercase mb-2 font-primary'>
+            <div className='grid grid-cols-1 md:grid-cols-3 items-center'>
+              <div className='text-center '>
+                <h3 className='font-bold text-xl uppercase mb-2 font-primary'>
                   mức độ sở hữu kiến thức
                 </h3>
                 <span className='font-black text-4xl text-[#8B9DFF]'>
@@ -308,8 +308,8 @@ const ResultPage = () => {
                 </div>
               </div>
 
-              <div className='text-center md:text-left'>
-                <h3 className='font-bold text-sm uppercase mb-2 font-primary'>
+              <div className='text-center'>
+                <h3 className='font-bold text-xl uppercase mb-2 font-primary'>
                   mức độ áp dụng kiến thức
                 </h3>
                 <span className='font-black text-4xl text-[#FF6B6B]'>
@@ -319,9 +319,9 @@ const ResultPage = () => {
             </div>
 
             {/* Skills Stats */}
-            <div className='grid grid-cols-1 md:grid-cols-3 items-center gap-4'>
-              <div className='text-center md:text-right'>
-                <h3 className='font-bold text-sm uppercase mb-2 font-primary'>
+            <div className='grid grid-cols-1 md:grid-cols-3 items-center'>
+              <div className='text-center '>
+                <h3 className='font-bold text-xl uppercase mb-2 font-primary'>
                   mức độ nắm bắt chiến thuật
                 </h3>
                 <span className='font-black text-4xl text-[#8B9DFF]'>
@@ -356,8 +356,8 @@ const ResultPage = () => {
                 </div>
               </div>
 
-              <div className='text-center md:text-left'>
-                <h3 className='font-bold text-sm uppercase mb-2 font-primary'>
+              <div className='text-center'>
+                <h3 className='font-bold text-xl uppercase mb-2 font-primary'>
                   mức độ vận dụng chiến thuật
                 </h3>
                 <span className='font-black text-4xl text-[#FF6B6B]'>
@@ -367,9 +367,9 @@ const ResultPage = () => {
             </div>
 
             {/* Behavior Stats */}
-            <div className='grid grid-cols-1 md:grid-cols-3 items-center gap-4'>
-              <div className='text-center md:text-right'>
-                <h3 className='font-bold text-sm uppercase mb-2 font-primary'>
+            <div className='grid grid-cols-1 md:grid-cols-3 items-center'>
+              <div className='text-center'>
+                <h3 className='font-bold text-xl uppercase mb-2 font-primary'>
                   mức độ chủ động
                 </h3>
                 <span className='font-black text-4xl text-[#8B9DFF]'>
@@ -404,8 +404,8 @@ const ResultPage = () => {
                 </div>
               </div>
 
-              <div className='text-center md:text-left'>
-                <h3 className='font-bold text-sm uppercase mb-2 font-primary'>
+              <div className='text-center'>
+                <h3 className='font-bold text-xl uppercase mb-2 font-primary'>
                   mức độ kiểm soát & phản ứng
                 </h3>
                 <span className='font-black text-4xl text-[#FF6B6B]'>
@@ -419,7 +419,7 @@ const ResultPage = () => {
 
       {/* 5. FOOTER / CTA */}
       <section className='py-20 bg-gradient-to-b from-[#8B9DFF] to-[#E0E7FF] text-center px-4'>
-        <h2 className='font-playfair italic text-4xl md:text-5xl mb-4 font-semibold'>
+        <h2 className='font-playfair italic text-4xl md:text-5xl mb-12 font-semibold'>
           SẴN SÀNG CHO BƯỚC TIẾP THEO?
           <br />
           CÙNG XEM LỘ TRÌNH TỰ HỌC CÁ
@@ -428,11 +428,11 @@ const ResultPage = () => {
         </h2>
 
         <Button
-          className='bg-black font-primary text-white hover:bg-gray-800 font-bold py-4 px-10 rounded-sm uppercase tracking-widest text-lg shadow-xl'
+          className='bg-black font-primary text-white hover:bg-gray-800 underline font-bold py-2 px-4 rounded-sm uppercase tracking-widest text-lg shadow-xl'
           onClick={clickedOn}
           disabled={isDownloading}
         >
-          NHẬN KẾT QUẢ CỦA BẠN
+          NHẬN LỘ TRÌNH
         </Button>
       </section>
 

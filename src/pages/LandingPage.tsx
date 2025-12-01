@@ -20,7 +20,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className='min-h-screen flex flex-col bg-white text-gray-900 font-sans'>
+    <div className='min-h-screen flex flex-col bg-white text-gray-900'>
       <header className='w-full bg-white py-6 px-4 md:px-8 flex justify-between items-center border-b border-gray-100 sticky top-0 z-50'>
         {/* Logo */}
         <div className='flex items-center space-x-2'>
@@ -91,14 +91,15 @@ const LandingPage = () => {
         )}
       </header>
 
-      {/* Hero Section */}
       <main className='flex-grow'>
         <div className='w-full mx-auto px-4 md:px-8 pt-12 pb-20'>
           <h1 className='text-6xl md:text-9xl font-black tracking-tighter mb-12 text-center font-primary'>
             DECODE YOUR <span className='text-[#9494FF]'>IELTS DNA</span>
           </h1>
-
-          <div className='grid grid-cols-1 md:grid-cols-12 '>
+        </div>
+        <div className='w-full'>
+          {/* Hero Section */}
+          <div className='grid grid-cols-1 md:grid-cols-12'>
             {/* Left Image Placeholder */}
             <div className='md:col-span-8 bg-gray-200 h-96 rounded-none flex items-center justify-center relative overflow-hidden group'>
               <img src='second.png' alt='' />
@@ -124,7 +125,7 @@ const LandingPage = () => {
           </div>
 
           {/* Sub-hero Grid */}
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-4'>
+          <div className='grid grid-cols-1 md:grid-cols-3'>
             <div className='bg-gray-100 p-8 h-64 flex flex-col justify-between hover:bg-gray-200 transition-colors'>
               <h3 className='text-2xl font-medium leading-tight font-primary'>
                 Được thiết kế bởi đội ngũ chuyên gia ielts của xa lộ english
@@ -150,10 +151,10 @@ const LandingPage = () => {
         </div>
 
         {/* About Section */}
-        <div>
-          <div className='w-full mx-auto px-4 md:px-8 py-2'>
+        <div className='mt-8'>
+          <div className='w-full'>
             {/* Header Section - Remains mostly the same */}
-            <div className='flex items-baseline mb-12'>
+            <div className='flex items-baseline mb-12 ml-4'>
               <span className='font-playfair italic text-3xl sm:text-4xl lg:text-6xl mr-4'>
                 ABOUT
               </span>
@@ -214,7 +215,7 @@ const LandingPage = () => {
         </div>
 
         {/* Call to Action / Formulas */}
-        <div className='bg-[#f8f2fc] text-white py-20 text-center'>
+        <div className='bg-[#808CFD] text-white py-20 text-center'>
           <p className='text-xs text-black font-bold tracking-widest uppercase mb-4'>
             YOUR IELTS DNA
           </p>
@@ -223,7 +224,7 @@ const LandingPage = () => {
           </h2>
           <Button
             onClick={handleStartQuiz}
-            className='bg-white text-black hover:bg-gray-100 font-bold py-3 px-8 rounded-sm uppercase tracking-wider mb-12'
+            className='bg-white text-black text-xl font-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-sm uppercase mb-12'
           >
             Bắt đầu
           </Button>
